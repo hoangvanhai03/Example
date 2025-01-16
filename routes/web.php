@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/reset-password', [AuthController::class, 'showResetPasswordForm'])->name('reset-password');
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::get('/dashboard', [AuthController::class, 'showdashboardForm'])->name('dashboard');
-Route::get('/logout', [AuthController::class, 'showLoginForm'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
@@ -38,9 +39,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
     Route::post('users/{id}/reset-password', [UserController::class, 'resetPassword'])->name('admin.users.reset-password');
 
-});
-
-
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    //quan ly cac shop
     Route::resource('shops', ShopController::class);
+
+    //quan ly category
+    Route::resource('categories', CategoryController::class);
 });
+

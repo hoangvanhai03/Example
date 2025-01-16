@@ -48,12 +48,15 @@
         <hr>
         <a href="{{ route('admin.users.index') }}">Quản lý người dùng</a>
         <a href="{{ route('shops.index') }}">Quản lý Shop</a>
+        <a href="{{ route('categories.index') }}">Quản lý Category</a>
         <a href="#">Quản lý hoạt động</a>
         <a href="#">Báo cáo</a>
         <a href="#">Cài đặt</a>
-        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            Đăng xuất
-        </a>
+        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+            @csrf
+            <button type="submit" class="btn btn-danger">Đăng xuất</butto>
+        </form>
+
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
         </form>

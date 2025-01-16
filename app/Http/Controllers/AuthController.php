@@ -65,6 +65,13 @@ class AuthController extends Controller
         return view('auth.reset-password');
     }
 
+    public function logout()
+    {
+        Auth::logout(); 
+        return redirect()->route('login')->with('success', 'Đã đăng xuất thành công.');
+    }
+
+
     public function resetPassword(Request $request)
     {
         $request->validate([
