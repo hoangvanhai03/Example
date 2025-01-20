@@ -4,6 +4,16 @@
 <div class="container">
     <h1>Thêm người dùng</h1>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('admin.users.store') }}" method="POST">
         @csrf
         <div class="mb-3">
@@ -12,15 +22,15 @@
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" required>
+            <input type="email" name="email" id="email" class="form-control" >
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Mật khẩu</label>
-            <input type="password" name="password" id="password" class="form-control" required>
+            <input type="password" name="password" id="password" class="form-control" >
         </div>
         <div class="mb-3">
             <label for="role" class="form-label">Vai trò</label>
-            <select name="role" id="role" class="form-select" required>
+            <select name="role" id="role" class="form-select" >
                 <option value="admin">Admin</option>
                 <option value="staff">Nhân viên</option>
                 <option value="customer">Khách hàng</option>
